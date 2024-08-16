@@ -117,9 +117,9 @@
 											<div class="col-12">
 												<ul class="actions">
 													<li><input type="button" value="Get Information" class="primary" onclick="redirectToPage()" /></li>
+													<li><button type="button" class="primary" data-action="submit">Submit</button></li>
 													<li><input type="reset" value="Reset" /></li>
 												</ul>
-												<input type="text" name="demo-city" id="demo-city" value="" placeholder="City" />
 											</div>
 										</div>
 									</form>
@@ -203,6 +203,40 @@
 		
 					// Redirect to the constructed URL
 					window.location.href = url;
+				}
+
+				document.addEventListener('DOMContentLoaded', () => {
+					// Add event listener to the submit button
+					document.querySelector('button[data-action="submit"]').addEventListener('click', handleSubmit);
+				});
+
+				async function handleSubmit(event) {
+					event.preventDefault(); // Prevent the default form submission
+
+					// Collect form data
+					const form = document.getElementById('myForm');
+					const formData = new FormData(form);
+					const data = Object.fromEntries(formData.entries());
+
+					try {
+						// Send data to the Flask server
+						const response = await fetch('/submit', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify(data),
+						});
+
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+
+						const result = await response.json();
+						console.log(result); // Handle the response from the server
+					} catch (error) {
+						console.error('Error:', error);
+					}
 				}
 			</script>
 
