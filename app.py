@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, send_from_directory
 import openai
 import os
 from dotenv import load_dotenv
@@ -7,6 +7,14 @@ app = Flask(__name__)
 
 # Set your OpenAI API key
 openai.api_key = os.getenv('OPENAI_API_KEY')
+
+@app.route('/')
+def index():
+    return render_template('elements.html')
+
+@app.route('/assets/css/main.css')
+def custom_static(filename):
+    return send_from_directory('assets', filename)
 
 @app.route('/submit', methods=['POST'])
 def submit_form():

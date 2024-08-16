@@ -50,7 +50,7 @@
 								<!-- Form -->
 									<h2>Search Engine</h2>
 
-									<form method="post" action="#">
+									<form method="post" action="#" id="myForm">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
 												<input type="text" name="demo-city" id="demo-city" value="" placeholder="City" />
@@ -117,12 +117,13 @@
 											<div class="col-12">
 												<ul class="actions">
 													<li><input type="button" value="Get Information" class="primary" onclick="redirectToPage()" /></li>
-													<li><button type="button" class="primary" data-action="submit">Submit</button></li>
+													<li><button type="button" class="primary" data-action="submit">AI Search</button></li>
 													<li><input type="reset" value="Reset" /></li>
 												</ul>
 											</div>
 										</div>
 									</form>
+									<div id="gptResponse"></div>
 									<hr />
 
 							</section>
@@ -206,7 +207,7 @@
 				}
 
 				document.addEventListener('DOMContentLoaded', () => {
-					// Add event listener to the submit button
+           			// Add event listener to the submit button
 					document.querySelector('button[data-action="submit"]').addEventListener('click', handleSubmit);
 				});
 
@@ -233,11 +234,11 @@
 						}
 
 						const result = await response.json();
-						console.log(result); // Handle the response from the server
-					} catch (error) {
-						console.error('Error:', error);
-					}
+                	document.getElementById('gptResponse').textContent = result.response;
+				} catch (error) {
+					console.error('Error:', error);
 				}
+			}
 			</script>
 
 	</body>
