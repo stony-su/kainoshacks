@@ -81,40 +81,48 @@
 											<!-- Break -->
 											<div class="col-4 col-12-small">
 												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Small</label>
+												<label for="demo-priority-low">1000 ft<sup>2</sup></label>
 											</div>
 											<div class="col-4 col-12-small">
 												<input type="radio" id="demo-priority-normal" name="demo-priority">
-												<label for="demo-priority-normal">Medium</label>
+												<label for="demo-priority-normal">2000 ft<sup>2</sup></label>
 											</div>
 											<div class="col-4 col-12-small">
 												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">Large</label>
+												<label for="demo-priority-high">3000 ft<sup>2</sup></label>
 											</div>
 											<!-- Break -->
 											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
+												<input type="checkbox" id="demo-school" name="demo-school">
+												<label for="demo-school">Next to School</label>
 											</div>
 											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">I am a human</label>
+												<input type="checkbox" id="demo-crime" name="demo-crime" checked>
+												<label for="demo-crime">Low Crime Rate</label>
+											</div>
+											<!-- Break -->
+											<div class="col-6 col-12-small">
+												<input type="checkbox" id="demo-good" name="demo-good">
+												<label for="demo-good">Good Community</label>
+											</div>
+											<div class="col-6 col-12-small">
+												<input type="checkbox" id="demo-multi" name="demo-multi" checked>
+												<label for="demo-multi">Multi National Community</label>
 											</div>
 											<!-- Break -->
 											<div class="col-12">
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+												<textarea name="demo-message" id="demo-message" placeholder="Additional Notes" rows="6"></textarea>
 											</div>
 											<!-- Break -->
 											<div class="col-12">
 												<ul class="actions">
-													<li><input type="submit" value="Send Message" class="primary" /></li>
+													<li><input type="button" value="Get Information" class="primary" onclick="redirectToPage()" /></li>
 													<li><input type="reset" value="Reset" /></li>
 												</ul>
+												<input type="text" name="demo-city" id="demo-city" value="" placeholder="City" />
 											</div>
 										</div>
 									</form>
-
-									<hr />
 									<hr />
 
 							</section>
@@ -185,6 +193,18 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				function redirectToPage() {
+					// Get the value from the input field
+					var city = document.getElementById('demo-city').value;
+		
+					// Construct the URL based on the input value
+					var url = city + '.html';
+		
+					// Redirect to the constructed URL
+					window.location.href = url;
+				}
+			</script>
 
 	</body>
 </html>
