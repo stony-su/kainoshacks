@@ -50,17 +50,17 @@
 								<!-- Form -->
 									<h2>Search Engine</h2>
 
-									<form method="post" action="#" id="myForm">
+									<form method="post" action="#" id="chat-form">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-city" id="demo-city" value="" placeholder="City" />
+												<input type="text" name="city" id="city" value="" placeholder="City" />
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<input type="email" name="demo-budget" id="demo-budget" value="" placeholder="Budget" />
+												<input type="text" name="budget" id="budget" value="" placeholder="Budget" />
 											</div>
 											<!-- Break -->
 											<div class="col-6 col-12-xsmall">
-												<select name="demo-category" id="demo-category">
+												<select name="adults" id="adults">
 													<option value=""># Of Adults</option>
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -68,9 +68,8 @@
 													<option value="4">4</option>
 												</select>
 											</div>
-
 											<div class="col-6 col-12-xsmall">
-												<select name="demo-category" id="demo-category">
+												<select name="children" id="children">
 													<option value=""># Of Children</option>
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -80,50 +79,50 @@
 											</div>
 											<!-- Break -->
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">1000 ft<sup>2</sup></label>
+												<input type="radio" id="priority-low" name="priority" value="1000 ft²" checked>
+												<label for="priority-low">1000 ft<sup>2</sup></label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-normal" name="demo-priority">
-												<label for="demo-priority-normal">2000 ft<sup>2</sup></label>
+												<input type="radio" id="priority-normal" name="priority" value="2000 ft²">
+												<label for="priority-normal">2000 ft<sup>2</sup></label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">3000 ft<sup>2</sup></label>
+												<input type="radio" id="priority-high" name="priority" value="3000 ft²">
+												<label for="priority-high">3000 ft<sup>2</sup></label>
 											</div>
 											<!-- Break -->
 											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-school" name="demo-school">
-												<label for="demo-school">Next to School</label>
+												<input type="checkbox" id="school" name="school">
+												<label for="school">Next to School</label>
 											</div>
 											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-crime" name="demo-crime" checked>
-												<label for="demo-crime">Low Crime Rate</label>
+												<input type="checkbox" id="crime" name="crime" checked>
+												<label for="crime">Low Crime Rate</label>
 											</div>
 											<!-- Break -->
 											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-good" name="demo-good">
-												<label for="demo-good">Good Community</label>
+												<input type="checkbox" id="community-good" name="community-good">
+												<label for="community-good">Good Community</label>
 											</div>
 											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-multi" name="demo-multi" checked>
-												<label for="demo-multi">Multi National Community</label>
+												<input type="checkbox" id="community-multi" name="community-multi" checked>
+												<label for="community-multi">Multi National Community</label>
 											</div>
 											<!-- Break -->
 											<div class="col-12">
-												<textarea name="demo-message" id="demo-message" placeholder="Additional Notes" rows="6"></textarea>
+												<textarea name="message" id="message" placeholder="Additional Notes" rows="6"></textarea>
 											</div>
 											<!-- Break -->
 											<div class="col-12">
 												<ul class="actions">
 													<li><input type="button" value="Get Information" class="primary" onclick="redirectToPage()" /></li>
-													<li><button type="button" class="primary" data-action="submit">AI Search</button></li>
+													<li><button type="submit" class="primary" data-action="submit">AI Search</button></li>
 													<li><input type="reset" value="Reset" /></li>
 												</ul>
 											</div>
 										</div>
 									</form>
-									<div id="gptResponse"></div>
+									<textarea id="response" rows="6" placeholder="Response will appear here..."></textarea> 
 									<hr />
 
 							</section>
@@ -180,10 +179,9 @@
 					</footer>
 
 				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
-
+				<div id="copyright">
+					<ul><li>&copy; BirdHouse</li><li>Dev: <a href="https://github.com/stony-su">Stony-Su</a></li></ul>
+				</div>
 			</div>
 
 		<!-- Scripts -->
@@ -194,52 +192,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script>
-				function redirectToPage() {
-					// Get the value from the input field
-					var city = document.getElementById('demo-city').value;
-		
-					// Construct the URL based on the input value
-					var url = city + '.html';
-		
-					// Redirect to the constructed URL
-					window.location.href = url;
-				}
-
-				document.addEventListener('DOMContentLoaded', () => {
-           			// Add event listener to the submit button
-					document.querySelector('button[data-action="submit"]').addEventListener('click', handleSubmit);
-				});
-
-				async function handleSubmit(event) {
-					event.preventDefault(); // Prevent the default form submission
-
-					// Collect form data
-					const form = document.getElementById('myForm');
-					const formData = new FormData(form);
-					const data = Object.fromEntries(formData.entries());
-
-					try {
-						// Send data to the Flask server
-						const response = await fetch('/submit', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify(data),
-						});
-
-						if (!response.ok) {
-							throw new Error('Network response was not ok');
-						}
-
-						const result = await response.json();
-                	document.getElementById('gptResponse').textContent = result.response;
-				} catch (error) {
-					console.error('Error:', error);
-				}
-			}
-			</script>
-
+			<script src="assets/js/search.js"></script>
+			<script src="assets/js/openai.js"></script>
 	</body>
 </html>
