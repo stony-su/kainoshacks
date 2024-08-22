@@ -1,7 +1,7 @@
 const form = document.getElementById('chat-form');
 const responseTextarea = document.getElementById('response');
 
-const API_KEY = 'sk-GdqyfvL2fV76v6W8FkLopn5Kdg9azETbRX75QI_AXnT3BlbkFJ7gFcIy_gYnf9AikUPOIlNsZ-7o7x-BTqWhmTWGPiMA';
+const API_KEY = 'sk-NYOi90yf4D0Ulf85RDXJq9GFmFrI-gLrusJwR0_VkPT3BlbkFJ8w7ToXb2a7IipyAdVaxxL2EwGAQHSCFAjHdi1xV04A';
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -18,16 +18,7 @@ form.addEventListener('submit', async (e) => {
     const message = document.getElementById('message').value.trim();
 
     const mytext = `
-        City: ${city}
-        Budget: ${budget}
-        Adults: ${adults}
-        Children: ${children}
-        Priority: ${priority}
-        Next to School: ${school}
-        Low Crime Rate: ${crime}
-        Good Community: ${communityGood}
-        Multi National Community: ${communityMulti}
-        Additional Notes: ${message}
+        Recommendations for neighborhoods in ${city} with a budget of ${budget} that accommodate ${adults} adults and ${children} children, prioritize a size of ${priority} and are next to a school, have a low crime rate, a good community, and a multi-national community. Additional notes: ${message}
     `;
 
     if (mytext) {
@@ -52,7 +43,12 @@ form.addEventListener('submit', async (e) => {
 
             if (response.ok) {
                 const data = await response.json();
-                responseTextarea.value = data.choices[0].message.content;
+                let result = data.choices[0].message.content;
+                
+                // Remove `**` symbols
+                result = result.replace(/\*\*/g, '');
+                
+                responseTextarea.value = result;
             } else {
                 responseTextarea.value = 'Error: Unable to process your request.';
             }
