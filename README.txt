@@ -12,7 +12,7 @@ How to use:
 1. Unzip / clone
 2. Open live server (/w mircosoft extension) of index.html
 
-Alternatively one can just open the website
+Alternatively one can just open the website: https://stony-su.github.io/kainoshacks/
 
 
 https://hackclub.slack.com/files/U05J4G2GC7J/F07HNQLRNR5/screenshare_-_2024-08-22_11_42_48_am.webm
