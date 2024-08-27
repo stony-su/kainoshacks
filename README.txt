@@ -14,8 +14,7 @@ How to use:
 
 Alternatively one can just open the website: https://stony-su.github.io/kainoshacks/
 
-
-https://hackclub.slack.com/files/U05J4G2GC7J/F07HNQLRNR5/screenshare_-_2024-08-22_11_42_48_am.webm
+https://drive.google.com/file/d/1zf8gYgEB1-B_JZQpAfjI6jz5NX1s6ilX/view?usp=sharing
 
 Credits:
 	Website template: HTML5 Up
